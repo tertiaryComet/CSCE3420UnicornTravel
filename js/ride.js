@@ -52,7 +52,7 @@ let map;
         unicorn = result.Unicorn;
         pronoun = unicorn.Gender === 'Male' ? 'his' : 'her';
         displayUpdate(unicorn.Name + ', your ' + unicorn.Color + ' unicorn, is on ' + pronoun + ' way.', unicorn.Color);
-        displayUpdate(' lat = ' + pickupLocation.latitude + ' long = ' + pickupLocation.long);
+        displayUpdate(' lat = ' + pickupLocation.latitude + ' long = ' + pickupLocation.longitude);
         console.log(pickupLocation);
         //  get the local weather, find nearby restaurants, movies
         // getWeather(pickupLocation, unicorn)
