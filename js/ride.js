@@ -194,7 +194,11 @@ async function getCurrentWeather(latitude, longitude) {
         const data = await response.json();
         console.log(data); // Check the console to see the received weather data
         // Process and display the weather information
-        displayUpdate('getcurweather data is ' + data);
+        const temperature = data.main.temp - 273.15; //Convert from kelvin to celsius.
+        const feelsliketemp = data.main.feels_like - 273.15; //what the temperature feels like. Convert from Kelvin to Celsius.
+        const describeweather = data.weather[0].description; //a description of the weather.
+
+        displayUpdate('It is currently ' + temperature + ' degrees celsius at your destination, although it feels like ' + feelsliketemp + ' degrees celsius. The area can be described as having '+ desribeweather+'.');
     } catch (error) {
         console.error('Error fetching weather data:', error);
     }
