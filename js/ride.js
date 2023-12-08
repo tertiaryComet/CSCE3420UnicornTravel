@@ -55,7 +55,8 @@ let map;
         displayUpdate(' lat = ' + pickupLocation.latitude + ' long = ' + pickupLocation.longitude);
         console.log(pickupLocation);
         //  get the local weather, find nearby restaurants, movies
-        // getWeather(pickupLocation, unicorn)
+        //getWeather(pickupLocation, unicorn)
+        getCurrentWeather(pickupLocation.latitude, pickupLocation.longitude);
 
         animateArrival(function animateCallback() {
             displayUpdate(unicorn.Name + ' has arrived. Giddy up!', unicorn.Color);
@@ -179,3 +180,22 @@ function displayUpdate(text, color='green') {
     $('#updates').prepend($(`<li style="background-color:${color}">${text}</li>`));
 }
 
+
+//I made this down here to see if the weather thing will work.
+//the api key for openweathermap.org is 5396951f5842986a2bab0c0553efa4be
+//Idk why it's async, I got this from chatGPT because I didn't know what to do.
+//I'm sorry if using chatGPT is against the rules, I need very direct instructions. I'm not great at extrapolating data/unstated rules or what applies to rules.
+async function getCurrentWeather(latitude, longitude) {
+    const apiKey = '5396951f5842986a2bab0c0553efa4be';
+    const apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}`;
+
+    try {
+        const response = await fetch(apiUrl);
+        const data = await response.json();
+        console.log(data); // Check the console to see the received weather data
+        // Process and display the weather information
+        displayUpdate('getcurweather data is ' + data);
+    } catch (error) {
+        console.error('Error fetching weather data:', error);
+    }
+}
