@@ -56,8 +56,11 @@ let map;
         console.log(pickupLocation);
         //  get the local weather, find nearby restaurants, movies
         //getWeather(pickupLocation, unicorn)
-        getCurrentWeather(pickupLocation.latitude, pickupLocation.longitude);
-
+        var normlongitude = pickupLocation.longitude;
+        normlongitude = normalizeLongitude(normlongitude);
+        //getCurrentWeather(pickupLocation.latitude, pickupLocation.longitude);
+        getCurrentWeather(pickupLocation.latitude, normlongitude);
+        
         animateArrival(function animateCallback() {
             displayUpdate(unicorn.Name + ' has arrived. Giddy up!', unicorn.Color);
             WildRydes.map.unsetLocation();
@@ -202,4 +205,15 @@ async function getCurrentWeather(latitude, longitude) {
     } catch (error) {
         console.error('Error fetching weather data:', error);
     }
+}
+
+//normalizing the longitude to see if I can fix the thing from looping incorrectly.
+function normalizeLongitude(longitude) {
+    while (longitude > 180) {
+        longitude -= 360;
+    }
+    while (longitude < -180) {
+        longitude += 360;
+    }
+    return longitude;
 }
